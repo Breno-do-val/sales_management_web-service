@@ -6,6 +6,8 @@ import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import br.com.breno.webservice.entities.pk.OrderItemPK;
 
 @Entity
@@ -14,7 +16,7 @@ public class OrderItem implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	@EmbeddedId
-	private OrderItemPK id;
+	private OrderItemPK id = new OrderItemPK();
 	
 	private Integer quantity;
 	private Double price;
@@ -30,6 +32,8 @@ public class OrderItem implements Serializable {
 		this.price = price;
 	}
 
+	/*On JAVA EE platform the method get is worthy*/
+	@JsonIgnore
 	public Order getOrder() {
 		return id.getOrder();
 	}
